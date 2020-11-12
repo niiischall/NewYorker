@@ -134,12 +134,12 @@ body{
 
 .search-input:focus{
     outline: none;
+    box-shadow: 0 0 5px 0.5px var(--color-item-selected-sidebar);
 }
 
 .search-input::placeholder{
-    font-size:2rem;
-    color: var(--color-black);
-    letter-spacing: 0.5px;
+    font-size: 2rem;
+    color: var(--color-border-sidebar);
 }
 
 .search-input--logo{

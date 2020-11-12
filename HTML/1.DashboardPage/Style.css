@@ -120,7 +120,7 @@ body{
 
 .search-input::placeholder{
     font-size:2rem;
-    color: var(--color-black);
+    color: var(--color-border-sidebar);
     letter-spacing: 0.5px;
 }
 
