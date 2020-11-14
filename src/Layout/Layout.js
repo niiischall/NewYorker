@@ -7,7 +7,11 @@ const Layout = (props) => {
     return(
         <div className = {classes.Layout}>
             <SideDrawer/>
-            <main style = {{flex: 1}}>
+            <main style = {{
+                flex: 1, 
+                display: 'flex', 
+                flexDirection: 'column'
+            }}>
                 {props.children}
             </main> 
         </div>

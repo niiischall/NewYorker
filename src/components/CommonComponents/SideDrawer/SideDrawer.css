@@ -62,5 +62,5 @@
 .footerText{
     font-size: 1.25rem;
     font-weight: 400;
-    color: var(--color-heading-text);
+    color: var(--color-toggle-button);
 }
