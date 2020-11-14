@@ -43,6 +43,7 @@
     box-shadow: 0 0 5px 0.5px var(--color-border-sidebar);
     display: flex;
     align-items: center;
+    transition: all .5s;
 }
 
 .Icon{

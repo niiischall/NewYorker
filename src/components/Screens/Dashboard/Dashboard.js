@@ -3,8 +3,7 @@ import classes from './Dashboard.css';
 
 const Dashboard = (props) => {
     return(
-    <div className = {classes.layoutMain}>
-        <div className = {classes.layoutContent}>
+    <div className = {classes.layoutContent}>
             <div className = {classes.contentSearch}>
                 <img 
                     src       = "assets/images/magnifying-glass.svg" 
@@ -302,7 +301,6 @@ const Dashboard = (props) => {
             </div>
             }
         </div>
-    </div>
     )
 }
 
