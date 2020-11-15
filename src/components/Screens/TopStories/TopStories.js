@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Carousel from "react-multi-carousel";
 import Select from 'react-select';
 import axios from 'axios';
-
 import "react-multi-carousel/lib/styles.css";
+
 import classes from './TopStories.css';
+import apiUrls from '../../../Services/apiUrls';
 
 import Spinner from '../../CommonComponents/Spinner/Spinner';
 
@@ -58,6 +59,16 @@ const TopStories = React.memo((props) => {
 
     const fetchStories = () => {
         setLoading(true);
+        const apiURL = apiUrls.topStories + selectedCategory.value + '.json?' + process.env.REACT_APP_API_KEY;
+        axios.get(apiURL)
+            .then((response) => {
+                setStories(response.data.results);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setLoading(false); 
+        })
     }
 
     let content = null;
@@ -74,7 +85,7 @@ const TopStories = React.memo((props) => {
             >
                 <div className= {classes.contentMainHeadline}>
                     <p className = {classes.contentMainHeadlineText}>
-                        Search for top stories across different sections on <span style = {{color: 'var(--color-item-sidebar)'}}>NYTimes.com</span>...
+                        Search for top stories across different sections currently on <span style = {{color: 'var(--color-item-sidebar)'}}>NYTimes.com</span>
                     </p>
                 </div>
                 <div className = {classes.contentMainPlaceholder}>
@@ -89,8 +100,80 @@ const TopStories = React.memo((props) => {
     }
 
     if(stories.length > 0 && !isLoading){
-        content = null;
-    }
+        content = (
+        <div>
+            <p className = {classes.contentHeadingText}>
+                The top stories in <span className = {classes.LightBold}>"{selectedCategory.label}"</span> on <span className = {classes.Bold}>NYTimes.com</span> currently...
+            </p>
+            <Carousel 
+            responsive = {
+            {
+                superLargeDesktop: {
+                    breakpoint: { max: 4000, min: 3000 },
+                    items: 1
+                },
+                desktop: {
+                    breakpoint: { max: 3000, min: 1024 },
+                    items: 1
+                },
+                tablet: {
+                    breakpoint: { max: 1024, min: 464 },
+                    items: 1
+                },
+                mobile: {
+                    breakpoint: { max: 464, min: 0 },
+                    items: 1
+                }
+            }}
+            arrows={false}
+            keyBoardControl={true}
+            containerClass= {classes.CarouselContainer}
+            dotListClass={classes.CarouselList}
+            itemClass= {classes.CarouselItem}
+            >
+            {
+                stories.map((story) => {
+                    let imageURL =  "assets/images/logo-placeholder.png";
+                    if(story.multimedia && story.multimedia.length > 0 && story.multimedia[2].url){
+                        imageURL = story.multimedia[2].url;
+                    }
+                    return(
+                        <div 
+                            className = {classes.contentMainArticles}
+                        >
+                            <div className = {classes.imageContainer}>
+                                <img 
+                                    src = {imageURL}
+                                    alt = "STORY"
+                                    className = {classes.image}
+                                />
+                            </div>
+                            <div className = {classes.contentContainer}>
+                                <span className = {classes.title}>
+                                    {story.title}
+                                </span>
+                                <span className = {classes.ByLine}>
+                                    {story.byline}
+                                </span>
+                                <span className = {classes.abstract}>
+                                    {story.abstract}
+                                </span>
+                                <a 
+                                    href = {story.url}
+                                    className = {classes.link}
+                                    target    = "_blank"
+                                    rel       = "noopener"
+                                >
+                                    Read More     
+                                </a>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+            </Carousel>
+        </div>
+    )}
 
     return (
         <div className = {classes.layoutContent}>
