@@ -37,7 +37,7 @@
     background-color: var(--color-item-selected-sidebar);
     border: .2rem solid transparent;
     border-radius: 2.6rem;
-    padding: 0.75rem 3.75rem;
+    padding: 1.5rem 4.5rem;
     color: var(--color-white);
     font-size: 1.8rem;
     font-family: inherit;
@@ -56,3 +56,29 @@
 .searchButton:focus{
     outline: none;
 }
+
+.contentMain{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+}
+
+.contentMainHeadline{
+    width: 75%;
+    margin: 3.5rem 0rem;
+    text-align: center;
+}
+
+.contentMainHeadlineText{
+    font-size: 4rem;
+    color: #7B8C92;
+    font-weight: 700;
+}
+
+.contentPlaceholderImg{
+    width: 30rem;
+    height: 30rem;
+}
+
