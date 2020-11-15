@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Carousel from "react-multi-carousel";
 import Select from 'react-select';
 import axios from 'axios';
@@ -52,7 +52,10 @@ const TopStories = React.memo((props) => {
     const [ selectedCategory, setSelectedCategory ] = useState(null);
     const [ stories, setStories ]                   = useState([]);
     const [ isLoading, setLoading ]                 = useState(false);
+    const [ currentSlide, setCurrentSlide ]         = useState(0);
 
+    const carouselRef = useRef();
+        
     const handleSelectedCategory = (event) => {
         setSelectedCategory(event);
     }
@@ -63,12 +66,29 @@ const TopStories = React.memo((props) => {
         axios.get(apiURL)
             .then((response) => {
                 setStories(response.data.results);
+                setCurrentSlide(0);
                 setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
                 setLoading(false); 
         })
+    }
+
+    useEffect(() => {
+        if(selectedCategory)
+            fetchStories();
+    }, [selectedCategory]);
+    
+    const handleKeyDown = (arrowType) => {
+        if(arrowType === "LEFT"){
+            carouselRef.current.previous();
+            setCurrentSlide(prevCount => prevCount-1);
+        }
+        else if(arrowType === "RIGHT"){
+            carouselRef.current.next();
+            setCurrentSlide(prevCount => prevCount+1);
+        }
     }
 
     let content = null;
@@ -105,41 +125,68 @@ const TopStories = React.memo((props) => {
             <p className = {classes.contentHeadingText}>
                 The top stories in <span className = {classes.LightBold}>"{selectedCategory.label}"</span> on <span className = {classes.Bold}>NYTimes.com</span> currently...
             </p>
-            <Carousel 
-            responsive = {
-            {
-                superLargeDesktop: {
-                    breakpoint: { max: 4000, min: 3000 },
-                    items: 1
-                },
-                desktop: {
-                    breakpoint: { max: 3000, min: 1024 },
-                    items: 1
-                },
-                tablet: {
-                    breakpoint: { max: 1024, min: 464 },
-                    items: 1
-                },
-                mobile: {
-                    breakpoint: { max: 464, min: 0 },
-                    items: 1
-                }
-            }}
-            arrows={false}
-            keyBoardControl={true}
-            containerClass= {classes.CarouselContainer}
-            dotListClass={classes.CarouselList}
-            itemClass= {classes.CarouselItem}
-            >
-            {
-                stories.map((story) => {
-                    let imageURL =  "assets/images/logo-placeholder.png";
-                    if(story.multimedia && story.multimedia.length > 0 && story.multimedia[2].url){
-                        imageURL = story.multimedia[2].url;
+            <div style = {{
+                display: 'flex',
+                justifyContent: 'space-around',
+                alignItems: 'center'
+            }}>
+                <div 
+                    className = {classes.IconContainer}
+                    style = {
+                        currentSlide !== 0
+                        ? {backgroundColor: 'var(--color-item-selected-sidebar)'}
+                        : {backgroundColor: 'var(--color-border-sidebar)'}
                     }
-                    return(
+                >
+                    <img 
+                        src       = "assets/images/arrow_back.svg"
+                        alt       = "PREV"
+                        style     = {{
+                            marginLeft: '12.5px',
+                            width: '1.5rem',
+                            height: '1.5rem'
+                        }}
+                        className = {classes.Icon}
+                        onClick = {() => handleKeyDown('LEFT')}
+                    />
+                </div>
+                <Carousel 
+                    responsive = {
+                    {
+                        superLargeDesktop: {
+                            breakpoint: { max: 4000, min: 3000 },
+                            items: 1
+                        },
+                        desktop: {
+                            breakpoint: { max: 3000, min: 1024 },
+                            items: 1
+                        },
+                        tablet: {
+                            breakpoint: { max: 1024, min: 464 },
+                            items: 1
+                        },
+                        mobile: {
+                            breakpoint: { max: 464, min: 0 },
+                            items: 1
+                        }
+                    }}
+                    arrows={false}
+                    keyBoardControl={true}
+                    containerClass= {classes.CarouselContainer}
+                    dotListClass={classes.CarouselList}
+                    itemClass= {classes.CarouselItem}
+                    ref = {carouselRef}
+                    >
+                    {
+                    stories.map((story) => {
+                        let imageURL =  "assets/images/logo-placeholder.png";
+                        if(story.multimedia && story.multimedia.length > 0 && story.multimedia[2].url)
+                            imageURL = story.multimedia[2].url;
+                    
+                        return(
                         <div 
                             className = {classes.contentMainArticles}
+                            key       = {story.title}
                         >
                             <div className = {classes.imageContainer}>
                                 <img 
@@ -168,10 +215,26 @@ const TopStories = React.memo((props) => {
                                 </a>
                             </div>
                         </div>
-                    )
-                })
-            }
-            </Carousel>
+                        )
+                    })
+                }
+                </Carousel>
+                <div 
+                    className = {classes.IconContainer}
+                    style = {
+                        currentSlide < stories.length 
+                        ? {backgroundColor: 'var(--color-item-selected-sidebar)'}
+                        : {backgroundColor: 'var(--color-border-sidebar)'}
+                    }
+                >
+                    <img 
+                        src       = "assets/images/chevron-right.svg"
+                        alt       = "NEXT"
+                        className = {classes.Icon}
+                        onClick   = {() => handleKeyDown('RIGHT')}
+                    />
+                </div>
+            </div>
         </div>
     )}
 
@@ -188,12 +251,6 @@ const TopStories = React.memo((props) => {
                     className    = {classes.searchInput} 
                     styles       = {colourStyles}
                 />
-                <button 
-                    className = {classes.searchButton}
-                    onClick   = {fetchStories}
-                >
-                    Search
-                </button>
             </div>
             {content}
         </div>
