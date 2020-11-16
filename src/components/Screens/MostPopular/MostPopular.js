@@ -22,7 +22,7 @@ const MostPopular = React.memo((props) => {
     }, []);
 
     const changeStoriesLimit = () => {
-        setStoriesLimit(mostViewed.length);
+        setStoriesLimit(20);
     }
 
     let content = null;
@@ -106,7 +106,7 @@ const MostPopular = React.memo((props) => {
                 ? <Spinner />
                 : <div>
                     {content}
-                    {  mostViewed.length > storiesLimit &&
+                    {  storiesLimit < 20 &&
                         <div className = {classes.ButtonContainer}>
                             <button 
                                 className = {classes.searchButton}

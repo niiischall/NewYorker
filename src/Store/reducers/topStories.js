@@ -62,7 +62,6 @@ const storiesReducer = (state = initialState, action) => {
                 topStoriesLoader: false
             }
         default:
-            console.log('Invalid Action Type.');
             return state;
     }
 }
