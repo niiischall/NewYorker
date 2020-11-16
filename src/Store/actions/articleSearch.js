@@ -43,3 +43,39 @@ export const fetchArticles = (inputQuery) => {
         })
     }
 } 
+
+const pageChangeStart = () => {
+    return {
+        type: actionType.ARTICLE_CHANGE_PAGE_START
+    }
+}
+
+const pageChangeSuccess = (selectedPage, articles) => {
+    return {
+        type: actionType.ARTICLE_CHANGE_PAGE_SUCCESS,
+        articles: articles,
+        selectedPage: selectedPage
+    }
+}
+
+const pageChangeFailure = () => {
+    return {
+        type: actionType.ARTICLE_CHANGE_PAGE_FAILED
+    }
+}
+
+export const fetchNewPage = (searchQuery, pageNumber) => {
+    let apiUrl = apiUrls.articleSearch + searchQuery + '&page=' + pageNumber + '&'+ process.env.REACT_APP_API_KEY;
+    
+    return dispatch => {
+        dispatch(pageChangeStart());
+        axios.get(apiUrl)
+        .then(response => {
+            dispatch(pageChangeSuccess(pageNumber, response.data.response.docs));
+        })
+        .catch(error =>{
+            console.log(error);
+            dispatch(pageChangeFailure());
+        })
+    }
+}

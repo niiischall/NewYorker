@@ -3,6 +3,9 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     articles: [],
     searchQuery: '',
+    pages: [1, 2, 3, 4, 5, 6, 7],
+    selectedPage: 1,
+    pageLoader: false,
     articleSearchLoader: false
 }
 
@@ -12,7 +15,8 @@ const articlesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 searchQuery: action.query,
-                articles: []
+                articles: [],
+                selectedPage: 1
             }
         case actionTypes.ARTICLE_SEARCH_START:
             return{
@@ -29,6 +33,23 @@ const articlesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 articleSearchLoader: false
+            }
+        case actionTypes.ARTICLE_CHANGE_PAGE_START:
+            return {
+                ...state,
+                pageLoader: true
+            }
+        case actionTypes.ARTICLE_CHANGE_PAGE_FAILED:
+            return {
+                ...state,
+                pageLoader: false
+            }
+        case actionTypes.ARTICLE_CHANGE_PAGE_SUCCESS:
+            return {
+                ...state,
+                articles: action.articles,
+                selectedPage: action.selectedPage,
+                pageLoader: false
             }
         default:
             return state;

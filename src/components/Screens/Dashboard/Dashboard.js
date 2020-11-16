@@ -8,9 +8,16 @@ import Spinner from '../../CommonComponents/Spinner/Spinner';
 const Dashboard = (props) => {
     const dispatch = useDispatch();
 
-    const articles    = useSelector(store => store.articleSearch.articles);
-    const searchQuery = useSelector(store => store.articleSearch.searchQuery);
-    const isLoading   = useSelector(store => store.articleSearch.articleSearchLoader);
+    const articles     = useSelector(store => store.articleSearch.articles);
+    const searchQuery  = useSelector(store => store.articleSearch.searchQuery);
+    const pages        = useSelector(store => store.articleSearch.pages);
+    const pageLoader   = useSelector(store => store.articleSearch.pageLoader);
+    const selectedPage = useSelector(store => store.articleSearch.selectedPage);
+    const isLoading    = useSelector(store => store.articleSearch.articleSearchLoader);
+
+    const paginationHandler = (page) => {
+        dispatch(actions.fetchNewPage(searchQuery, page));
+    }
 
     const handleSearchInput = (event) => {
         dispatch(actions.inputArticleSearch(event.target.value));
@@ -61,7 +68,9 @@ const Dashboard = (props) => {
                             articles
                         </p>
                     </div>
-                    <div className = {classes.articlesColumnHeading}>
+                    <div 
+                        className = {classes.articlesColumnHeading} 
+                    >
                         <span className = {[
                                 classes.articlesColumnHeadings,
                                 classes.headingDate
@@ -93,8 +102,8 @@ const Dashboard = (props) => {
                             Source
                         </span>
                     </div>
-                    {
-                        articles.map((article, index) => {
+                    {   !pageLoader
+                        ?articles.map((article, index) => {
 
                             let publishedDate = "";
                             let d     = new Date(article.pub_date);
@@ -131,13 +140,13 @@ const Dashboard = (props) => {
                                             classes.articlesColumns,
                                             classes.columnsHeadline
                                         ].join(' ')}>
-                                            {article.headline.main}
+                                            {article.headline.main.substring(0, 50)}...
                                         </p>
                                         <p className = {[
                                             classes.articlesColumns,
                                             classes.columnsSummary
                                         ].join(' ')}>
-                                            {article.abstract.substring(0, 75)}...
+                                            {article.abstract.substring(0, 50)}...
                                         </p>
                                         <div className = {[
                                             classes.articlesColumns,
@@ -161,36 +170,46 @@ const Dashboard = (props) => {
                                     </div>
                                 )
                             return returnedArticle;
-                            })  
-                        }
+                            })
+                        : <Spinner/> 
+                    }
                     </div>                        
                     <div className = {classes.contentToggle}>
+                        <span className = {classes.contentToggleText}>
+                            Check out article details the <span style = {{color: 'var( --color-item-selected-sidebar)'}}>'Articles'</span> section.
+                        </span>
                         <ul className = {classes.contentToggleList}>
-                            <li className = {[
-                                classes.contentToggleItem, 
-                                classes.selectedItem
-                            ].join(' ')}>1</li>
-                            <li className = {classes.contentToggleItem}>2</li>
-                            <li className = {classes.contentToggleItem}>3</li>
-                            <li className = {classes.contentToggleItem}>4</li>
-                            <li className = {classes.contentToggleItem}>5</li>
-                            <li className = {classes.contentToggleItem}>6</li>
-                            <li className = {classes.contentToggleItem}>7</li>
-                            <li className = {classes.contentToggleItem}>8</li>
-                            <li className = {classes.contentToggleItem}>9</li>
-                            <li 
-                                className = {classes.contentToggleItem} 
-                                style = {{ padding :"2px"}}
-                            >10</li>
+                            {
+                                pages.map((page) => {
+                                    let styles = [classes.contentToggleItem];
+                                    if(selectedPage === page)
+                                        styles.push(classes.selectedItem)
+
+                                    return(
+                                        <li 
+                                            className = {styles.join(' ')}
+                                            onClick   = {() => paginationHandler(page)}
+                                            key       = {page}
+                                        >
+                                            {page}
+                                        </li>
+                                    )
+                                })
+                            }
                         </ul>
-                    </div>   
-                    <div className = {classes.contentMainGraph}>
-                        <div className = {classes.articlesHeading}>
-                            <p className = {classes.articlesHeadingText}>
-                                NUMBER OF ARTICLES PUBLISHED FOR “Elections”
-                            </p>
-                        </div>
                     </div>
+                    <div style = {{marginBottom: '3rem'}}>
+                        <div className = {classes.contentMainGraph}>
+                            <div className = {classes.articlesHeading}>
+                                <p className = {classes.articlesHeadingText}>
+                                    NUMBER OF ARTICLES PUBLISHED FOR “Elections”
+                                </p>
+                            </div>
+                        </div>
+                        <span className = {classes.contentToggleText}>
+                            Check out analytics details in the <span style = {{color: 'var( --color-item-selected-sidebar)'}}>'Analytics'</span> section.
+                        </span>
+                    </div>   
                 </div>
             )
         }
