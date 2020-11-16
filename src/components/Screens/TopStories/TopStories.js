@@ -1,42 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Carousel from "react-multi-carousel";
 import Select from 'react-select';
-import axios from 'axios';
 import "react-multi-carousel/lib/styles.css";
 
-import classes from './TopStories.css';
-import apiUrls from '../../../Services/apiUrls';
+import classes      from './TopStories.css';
+import * as actions from '../../../Store/actions/topStories';
 
 import Spinner from '../../CommonComponents/Spinner/Spinner';
 
 const TopStories = React.memo((props) => {
-    const categories = [
-        {label: "Arts", value: 'arts'},
-        {label: "Automobiles", value: 'automobiles'},
-        {label: 'Books', value: 'books'},
-        {label: 'Business', value: 'business'},
-        {label: 'Fashion', value: 'fashion'},
-        {label: 'Health', value: 'health'},
-        {label: 'Home', value: 'home'},
-        {label: 'Insider', value: 'insider'},
-        {label: 'Magazine', value: 'magazine'},
-        {label: 'Movies', value: 'movies'},
-        {label: 'New York Region', value: 'nyregion'},
-        {label: 'Obituaries', value: 'obituraies'},
-        {label: 'Opinion', value: 'opinion'},
-        {label: 'Politics', value: 'politics'},
-        {label: 'Real Estate', value: 'realestate'},
-        {label: 'Science', value: 'science'},
-        {label: 'Sports', value: 'sports'},
-        {label: 'Sunday Review', value: 'sundayreview'},
-        {label: 'Technology', value: 'technology'},
-        {label: 'Theater', value: 'theater'},
-        {label: 'T-Magazine', value: 't-magazine'},
-        {label: 'Travel', value: 'travel'},
-        {label: 'Up Shot', value: 'upshot'},
-        {label: 'United States', value: 'us'},
-        {label: 'World', value: 'world'}
-    ]
+    const carouselRef = useRef();
+    const dispatch    = useDispatch(); 
+    
+    const categories       = useSelector(store => store.topStories.searchCategories);
+    const selectedCategory = useSelector(store => store.topStories.selectedCategory);
+    const isLoading        = useSelector(store => store.topStories.topStoriesLoader);
+    const stories          = useSelector(store => store.topStories.topStories);
+
+    const [ currentSlide, setCurrentSlide ] = useState(0);
+
+    useEffect(() => {
+        if(selectedCategory){
+            setCurrentSlide(0);
+            dispatch(actions.fetchStories(selectedCategory));
+        }
+    }, [selectedCategory]);
 
     const colourStyles = {
         control: styles => ({...styles, padding: '.85rem'}),
@@ -48,38 +37,11 @@ const TopStories = React.memo((props) => {
         }),
         option:  styles => ({...styles, color: 'var(--color-item-selected-sidebar)'})
     }
-
-    const [ selectedCategory, setSelectedCategory ] = useState(null);
-    const [ stories, setStories ]                   = useState([]);
-    const [ isLoading, setLoading ]                 = useState(false);
-    const [ currentSlide, setCurrentSlide ]         = useState(0);
-
-    const carouselRef = useRef();
         
     const handleSelectedCategory = (event) => {
-        setSelectedCategory(event);
+        dispatch(actions.selectCategory(event));
     }
 
-    const fetchStories = () => {
-        setLoading(true);
-        const apiURL = apiUrls.topStories + selectedCategory.value + '.json?' + process.env.REACT_APP_API_KEY;
-        axios.get(apiURL)
-            .then((response) => {
-                setStories(response.data.results);
-                setCurrentSlide(0);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false); 
-        })
-    }
-
-    useEffect(() => {
-        if(selectedCategory)
-            fetchStories();
-    }, [selectedCategory]);
-    
     const handleKeyDown = (arrowType) => {
         if(arrowType === "LEFT"){
             carouselRef.current.previous();
@@ -93,9 +55,8 @@ const TopStories = React.memo((props) => {
 
     let content = null;
 
-    if(isLoading){
+    if(isLoading)
         content = <Spinner />
-    }
 
     if(stories.length === 0 && !isLoading){
         content = (

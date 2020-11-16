@@ -8,10 +8,13 @@ import * as serviceWorker from './serviceWorker';
 
 import './index.css';
 import App from './App';
-import storiesReducer from './Store/reducers/popularStories';
+
+import topStoriesReducer     from './Store/reducers/topStories';
+import popularStoriesReducer from './Store/reducers/popularStories';
 
 const rootReducer = combineReducers({
-  stories: storiesReducer
+  popularStories: popularStoriesReducer,
+  topStories: topStoriesReducer
 });
 
 const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;

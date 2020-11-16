@@ -8,8 +8,8 @@ import * as actionStories from '../../../Store/actions/popularStories';
 const MostPopular = React.memo((props) => {
     
     const dispatch   = useDispatch();
-    const mostViewed = useSelector(store => store.stories.mostViewed);
-    const isLoading  = useSelector(store => store.stories.mostViewedLoader);
+    const mostViewed = useSelector(store => store.popularStories.mostViewed);
+    const isLoading  = useSelector(store => store.popularStories.mostViewedLoader);
 
     const [ storiesLimit, setStoriesLimit ] = useState(5);
 

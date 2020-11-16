@@ -12,14 +12,14 @@ const mostPopularStart = () => {
 
 const mostPopularSuccess = (mostViewed) => {
     return {
-        type: actionTypes.MOST_POPULAR,
+        type: actionTypes.MOST_POPULAR_SUCCESS,
         mostViewed: mostViewed
     }
 }
 
-const mostPopularEnd = () => {
+const mostPopularFailure = () => {
     return {
-        type: actionTypes.MOST_POPULAR_END
+        type: actionTypes.MOST_POPULAR_FAILURE
     }
 }
 
@@ -29,11 +29,10 @@ export const mostPopular = () => {
         axios.get(apiUrl.mostViewed)
         .then(response => {
             dispatch(mostPopularSuccess(response.data.results));
-            dispatch(mostPopularEnd());
         })
         .catch(error =>{
             console.log(error);
-            dispatch(mostPopularEnd());
+            dispatch(mostPopularFailure());
         })
     }
 }
