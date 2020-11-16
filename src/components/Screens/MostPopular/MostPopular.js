@@ -1,28 +1,21 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import {useSelector, useDispatch } from 'react-redux';
 import classes from './MostPopular.css';
 
 import Spinner from '../../CommonComponents/Spinner/Spinner';
-import apiUrl from '../../../Services/apiUrls';
+import * as actionStories from '../../../Store/actions/popularStories';
 
 const MostPopular = React.memo((props) => {
     
-    const [ mostViewed, setMostViewed ]     = useState([]);
-    const [ storiesLimit, setStoriesLimit ] = useState(5);
-    const [ isLoading, setLoading ]         = useState(false);
+    const dispatch   = useDispatch();
+    const mostViewed = useSelector(store => store.stories.mostViewed);
+    const isLoading  = useSelector(store => store.stories.mostViewedLoader);
 
-    const getMostViewed = useCallback(() => {
-        setLoading(true);
-        axios.get(apiUrl.mostViewed)
-        .then((response) => {
-            setMostViewed(response.data.results);
-            setLoading(false); 
-        })
-        .catch((error) => {
-            console.log(error);
-            setLoading(false); 
-        })
-    }, [mostViewed, setMostViewed, setLoading]);
+    const [ storiesLimit, setStoriesLimit ] = useState(5);
+
+    const getMostViewed = () => {
+        dispatch(actionStories.mostPopular());
+    };
 
     useEffect(() => {
         getMostViewed();

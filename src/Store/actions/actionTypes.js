@@ -1,0 +1,5 @@
+export const TOP_STORIES  = 'TOP_STORIES';
+
+export const MOST_POPULAR       = 'MOST_POPULAR';
+export const MOST_POPULAR_START = 'MOST_POPULAR_START';
+export const MOST_POPULAR_END   = 'MOST_POPULAR_END';
