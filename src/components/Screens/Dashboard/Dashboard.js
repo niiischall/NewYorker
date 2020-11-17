@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import classes from './Dashboard.css';
 
 import * as actions from '../../../Store/actions/articleSearch';
@@ -176,7 +177,10 @@ const Dashboard = (props) => {
                     </div>                        
                     <div className = {classes.contentToggle}>
                         <span className = {classes.contentToggleText}>
-                            Check out article details the <span style = {{color: 'var( --color-item-selected-sidebar)'}}>'Articles'</span> section.
+                            Check out the articles in detail in the <NavLink to = "/articles" 
+                                style = {{color: 'var( --color-item-selected-sidebar)'}}
+                            >
+                            'Articles'</NavLink> section.
                         </span>
                         <ul className = {classes.contentToggleList}>
                             {
@@ -207,7 +211,10 @@ const Dashboard = (props) => {
                             </div>
                         </div>
                         <span className = {classes.contentToggleText}>
-                            Check out analytics details in the <span style = {{color: 'var( --color-item-selected-sidebar)'}}>'Analytics'</span> section.
+                            Check out the analytics in detail in the <NavLink to = "/analytics" 
+                                style = {{color: 'var( --color-item-selected-sidebar)'}}
+                            >
+                            'Analytics'</NavLink> section.
                         </span>
                     </div>   
                 </div>

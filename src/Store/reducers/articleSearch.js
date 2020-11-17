@@ -3,7 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     articles: [],
     searchQuery: '',
-    pages: [1, 2, 3, 4, 5, 6, 7],
+    pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     selectedPage: 1,
     pageLoader: false,
     articleSearchLoader: false
