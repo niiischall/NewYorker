@@ -1,4 +1,3 @@
-#new-yorker
 # New Yorker - A React Project
 A React Application. 
 This is a react application called 'New Yorker' which uses New York Times API endpoint for a search through its content. 
