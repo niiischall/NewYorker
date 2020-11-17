@@ -1,5 +1,146 @@
-.layoutMain{
+.layoutContent{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    flex: 1;
+    padding: 0px 3.5rem;
+    background-color: var(--color-background-content);
+}
+
+.contentMain{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+}
+
+.contentMainHeadline{
+    width: 75%;
+    margin: 3.5rem 0rem;
+    text-align: center;
+}
+
+.contentMainHeadlineText{
+    font-size: 4rem;
+    color: #7B8C92;
+    font-weight: 700;
+}
+
+.contentMainPlaceholder{
+    margin-bottom: 16px;
+}
+
+.contentPlaceholderImg{
+    width: 30rem;
+    height: 30rem;
+}
+
+.contentHeadingText{
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: var(--color-heading-text);
+    margin: 3rem 0rem;
+}
+
+.Bold{
+    color: var(--color-item-sidebar);
+    font-weight: 700;
+}
+
+
+/*Card Styling*/
+
+.cardContainer{
+    width: 85%;
+    margin: auto;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+}
+
+.card{
+    perspective: 0rem;
+    -moz-perspective: 0rem;
+    position: relative;
+    width: 25rem;
+    height: 37.5rem;
+    margin-bottom: 2rem;
+}
+
+.cardSide{
     width: 100%;
+    height: 100%;
+    font-size: 2rem;
+    transition: all .8s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: .2rem .8rem 1.9rem var(--color-shadaow);
+    border-radius: 3px;
+    backface-visibility: hidden;
+    overflow: hidden;
+}
+
+.cardSideFront{
+    background-color: var(--color-white);
+    padding-bottom: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.cardSideBack{
+    transform: rotateY(180deg);
+    background-image: linear-gradient(to right bottom, 
+        var(--color-item-selected-sidebar),
+        var(--color-item-sidebar)) ;
+    
+}
+
+.card:hover .cardSideFront {
+    transform: rotateY(-180deg);
+}
+
+.card:hover .cardSideBack {
+    transform: rotateY(0);
+}
+
+.Link{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    text-decoration: none;
+    background-color: var(--color-white);
+    box-shadow: .2rem .8rem 1.9rem var(--color-shadaow);
+    color: var(--color-item-sidebar);
+    padding: 1rem;
+    border-radius: 35px;
+    font-size: 1.5rem;
+    font-family: inherit;
+}
+
+.headline{
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 5px;
+    color: var(--color-item-selected-sidebar);
+}
+
+.abstract{
+    font-size: 1.15rem;
+    text-align: center;
+    padding: 5px 5px;
+    color: var(--color-heading-text);
+}
+
+.byline{
+    font-size: 1.25rem;
+    text-align: center;
+    padding: 0px 10px;
+    color: var(--color-item-sidebar);
 }
