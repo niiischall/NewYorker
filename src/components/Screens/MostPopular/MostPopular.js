@@ -55,7 +55,7 @@ const MostPopular = React.memo((props) => {
                         <div style = {{
                             display:'flex', 
                             flexDirection: 'column', 
-                            justifyContent: 'space-around',
+                            justifyContent: 'space-between',
                             alignItems: 'center'
                         }}>
                             <img 
@@ -69,7 +69,7 @@ const MostPopular = React.memo((props) => {
                                 target    = "_blank"
                                 rel       = "noopener"
                             >
-                                See More 
+                                Read More 
                             </a>
                         </div>
                         <div
@@ -111,7 +111,17 @@ const MostPopular = React.memo((props) => {
 
     return (
         <div className = {classes.layoutContent}>
-            <div>
+            <div style = {{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'center'
+            }}>
+                <img 
+                    className = {classes.drawerLogo}
+                    src       = "assets/images/icons-menu.png" 
+                    alt       = "Side drawer" 
+                />
                 <p className = {classes.contentHeadingText}>
                     The most popular articles on <span className = {classes.Bold}>NYTimes.com</span> this week...
                 </p>

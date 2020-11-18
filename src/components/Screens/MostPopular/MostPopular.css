@@ -9,6 +9,7 @@
 @media (max-width: 75em){
     .layoutContent{
       align-items: center;
+      height: 100vh;
     }
 }
 
@@ -27,7 +28,8 @@
 
 @media (max-width: 75em){
     .contentHeadingText{
-      text-align: center;
+        text-align: center;
+        width: 85%;
     }
 }
 
@@ -138,8 +140,21 @@
 }
 
 @media (max-width: 56.25em){
+    .title{
+        font-size: 2rem;
+    }
+
+    .byLine{
+        font-size: 1.75rem;
+    }
+
+    .date{
+        font-size:1.65rem;
+    }
+
     .abstract{
       width: 100%;
+      font-size: 1.65rem;
     }
 }
   
@@ -204,11 +219,13 @@
 
 .mobileLink{
     margin-top: 1rem;
+    margin-bottom: auto;
     padding: 0.5rem 1rem;
     font-family: inherit;
     text-decoration: none;
-    font-size: 1.25rem;
-    border-radius: 1.5rem;
+    font-size: 1.65rem;
+    font-weight: 700;
+    border-radius: 1.75rem;
     color: var(--color-white);
     box-shadow: .2rem .8rem 1.9rem var(--color-shadaow);
     background-color: var(--color-item-selected-sidebar);
@@ -220,3 +237,17 @@
     }
 }
 
+.drawerLogo{
+    width: 3.5rem;
+    height: 3.5rem; 
+    margin-right: 1rem;
+    overflow: hidden;
+    flex:start;
+    cursor: pointer;
+}
+
+@media (min-width: 75em){
+    .drawerLogo{
+        display: none;
+    }
+}
