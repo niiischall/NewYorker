@@ -32,6 +32,30 @@ html{
   font-family: 'Roboto', sans-serif;
 }
 
+@media (max-width: 112.5em){
+  html{
+    font-size: 75%;
+  }
+}
+
+@media (max-width: 75em){
+  html{
+    font-size: 56.25%;
+  }
+}
+
+@media (max-width: 56.25em){
+  html{
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 37.5em){
+  html{
+    font-size: 47.5%;
+  }
+}
+
 body{
   font-family: 'Roboto', sans-serif;
   font-weight: 400;

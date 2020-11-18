@@ -7,6 +7,12 @@
     border: 1px solid var(--color-border-sidebar);
 }
 
+@media (max-width: 75em){
+    .layoutSidebar {
+        display: none;
+    }
+}
+
 .sidebarLogo{
     padding: 32px 0px 25px 40px;
 }

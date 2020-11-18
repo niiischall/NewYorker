@@ -52,11 +52,26 @@ const MostPopular = React.memo((props) => {
                         key       = {stories.asset_id}
                         className = {classes.contentMainArticles}
                     >
-                        <img 
-                            src   = {imageURL}
-                            className = {classes.contentImage}
-                            alt   = "StoriesImage"
-                        />
+                        <div style = {{
+                            display:'flex', 
+                            flexDirection: 'column', 
+                            justifyContent: 'space-around',
+                            alignItems: 'center'
+                        }}>
+                            <img 
+                                src   = {imageURL}
+                                className = {classes.contentImage}
+                                alt   = "StoriesImage"
+                            />
+                            <a 
+                                className = {classes.mobileLink}
+                                href      = {stories.url}
+                                target    = "_blank"
+                                rel       = "noopener"
+                            >
+                                See More 
+                            </a>
+                        </div>
                         <div
                             className = {classes.contentText}
                         >    
