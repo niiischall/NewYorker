@@ -82,7 +82,7 @@ const TopStories = React.memo((props) => {
 
     if(stories.length > 0 && !isLoading){
         content = (
-        <div>
+        <div style = {{flex: '1'}}>
             <p className = {classes.contentHeadingText}>
                 The top stories in <span className = {classes.LightBold}>"{selectedCategory.label}"</span> on <span className = {classes.Bold}>NYTimes.com</span> currently...
             </p>
@@ -141,8 +141,8 @@ const TopStories = React.memo((props) => {
                     {
                     stories.map((story) => {
                         let imageURL =  "assets/images/logo-placeholder.png";
-                        if(story.multimedia && story.multimedia.length > 0 && story.multimedia[2].url)
-                            imageURL = story.multimedia[2].url;
+                        if(story.multimedia && story.multimedia.length > 0 && story.multimedia[3].url)
+                            imageURL = story.multimedia[3].url;
                     
                         return(
                         <div 
@@ -164,7 +164,7 @@ const TopStories = React.memo((props) => {
                                     {story.byline}
                                 </span>
                                 <span className = {classes.abstract}>
-                                    {story.abstract}
+                                    {story.abstract.substring(0, 100)}...
                                 </span>
                                 <a 
                                     href = {story.url}
@@ -202,6 +202,11 @@ const TopStories = React.memo((props) => {
     return (
         <div className = {classes.layoutContent}>
             <div className = {classes.contentSearch}>
+                <img 
+                    className = {classes.drawerLogo}
+                    src       = "assets/images/icons-menu.png" 
+                    alt       = "Side drawer" 
+                />
                 <Select
                     onChange     = {handleSelectedCategory}
                     value        = {selectedCategory}

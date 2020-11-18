@@ -6,9 +6,24 @@
     background-color: var(--color-background-content);
 }
 
+@media (max-width: 75em){
+    .layoutContent{
+      height: 100vh;
+    }
+}
+
+@media (max-width: 37.5em){
+    .layoutContent{
+      padding: 0 1.5rem;
+    }
+}
+
 .contentSearch{
     position: relative;
     margin-top: 3rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .searchInput{
@@ -20,6 +35,19 @@
     font-family: inherit;
     font-size: 2rem;
     color: black;
+}
+
+@media (max-width: 75em){
+    .searchInput{
+        width: 85%;
+        margin-left: 2rem;
+    }
+}
+
+@media (max-width: 56em){
+    .searchInput{
+        font-size: 2.5rem;
+    }
 }
 
 .CarouselContainer{
@@ -34,6 +62,11 @@
     width: 75rem;
 }
 
+@media (max-width: 56.2em){
+    .CarouselContainer ul{
+        width: 51.5rem;
+    }
+}
 
 .CarouselList{
     width: 100%!important;
@@ -43,6 +76,12 @@
 .CarouselItem{
     width: 75rem!important;
     list-style: none;
+}
+
+@media (max-width: 56.2em){
+    .CarouselContainer{
+        width: 100%!important;
+    }
 }
 
 .searchInput:focus{
@@ -101,6 +140,13 @@
     margin: 3rem 0rem;
 }
 
+@media (max-width: 56.2em){
+    .contentHeadingText{
+       text-align: center;
+       font-size: 3.75rem;
+    }
+}
+
 .LightBold{
     color: var(--color-item-selected-sidebar);
     font-weight: 700;
@@ -136,6 +182,15 @@
     align-items: center;
 }
 
+@media (max-width: 56.2em){
+    .contentMainArticles{
+        width: 51.5rem;
+        height: 51.5rem;
+        flex-direction: column;
+    }
+}
+
+
 .contentContainer{
     height: 100%;
     flex: 1;
@@ -148,6 +203,14 @@
     width: 25rem;
     height: 100%;
 }
+
+@media (max-width: 56.2em){
+    .imageContainer{
+        width: 51.5rem;
+        height: 27.5rem;
+    }
+}
+
 
 .image{
     width: 100%;
@@ -187,6 +250,14 @@
     color: var(--color-heading-text);
 }
 
+@media(max-width: 56.2em){
+    .abstract{
+        width: 100%;
+        font-size: 1.75rem;
+        font-weight: 400;
+    }
+}
+
 .link{
     display: inline-block;
     background-color: var(--color-toggle-button);
@@ -202,6 +273,12 @@
     color: var(--color-white);
 }
 
+@media(max-width: 56.2em){
+    .link{
+        font-size: 2.5rem;
+    }
+}
+
 .IconContainer{
     display: flex;
     align-items: center;
@@ -211,5 +288,23 @@
     box-shadow: .2rem .8rem 1.9rem var(--color-shadaow);
 }
 
+@media (max-width: 56.2em){
+    .IconContainer{
+        display: none;
+    }
+}
 
+.drawerLogo{
+    width: 3.5rem;
+    height: 3.5rem; 
+    overflow: hidden;
+    flex:start;
+    cursor: pointer;
+}
+
+@media (min-width: 75em){
+    .drawerLogo{
+        display: none;
+    }
+}
 
