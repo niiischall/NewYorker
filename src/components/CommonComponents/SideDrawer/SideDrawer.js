@@ -4,8 +4,18 @@ import {NavLink} from 'react-router-dom';
 import classes from './SideDrawer.css';
 
 const SideDrawer = (props) => {
+
+    let attachedClasses = [classes.layoutSidebar];
+
+    if(props.showState){   
+        attachedClasses = [classes.layoutSidebar, classes.Open];
+    }    
+    else{
+        attachedClasses = [classes.layoutSidebar, classes.Close];
+    }
+
     return(
-        <div className = {classes.layoutSidebar}>
+        <div className = {attachedClasses.join(' ')}>
             <div className = {classes.sidebarLogo}>
                 <img 
                     src = "assets/images/log-transparent-2x.png" 
@@ -58,7 +68,7 @@ const SideDrawer = (props) => {
                             Analytics
                         </NavLink>
                     </li>
-                    <li className = {classes.sidebarItem}>
+                    <li className = {classes.sidebarItem} onClick = {props.toggleSidebar}>
                         <NavLink 
                             to = "/topstories"
                             className = {classes.sidebarLink} 
@@ -72,7 +82,7 @@ const SideDrawer = (props) => {
                                 Top Stories
                         </NavLink>
                     </li>
-                    <li className = {classes.sidebarItem}>
+                    <li className = {classes.sidebarItem} onClick = {props.toggleSidebar}>
                         <NavLink 
                             to = "/mostpopular" 
                             className = {classes.sidebarLink}

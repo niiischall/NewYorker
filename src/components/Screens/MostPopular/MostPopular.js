@@ -121,6 +121,7 @@ const MostPopular = React.memo((props) => {
                     className = {classes.drawerLogo}
                     src       = "assets/images/icons-menu.png" 
                     alt       = "Side drawer" 
+                    onClick   = {props.toggleSidebar}
                 />
                 <p className = {classes.contentHeadingText}>
                     The most popular articles on <span className = {classes.Bold}>NYTimes.com</span> this week...

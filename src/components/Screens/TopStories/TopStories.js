@@ -205,7 +205,8 @@ const TopStories = React.memo((props) => {
                 <img 
                     className = {classes.drawerLogo}
                     src       = "assets/images/icons-menu.png" 
-                    alt       = "Side drawer" 
+                    alt       = "Side drawer"
+                    onClick   = {props.toggleSidebar} 
                 />
                 <Select
                     onChange     = {handleSelectedCategory}

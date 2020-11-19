@@ -6,12 +6,14 @@ import SideDrawer from '../components/CommonComponents/SideDrawer/SideDrawer';
 const Layout = (props) => {
     return(
         <div className = {classes.Layout}>
-            <SideDrawer/>
-            <main style = {{
-                flex: 1, 
-                display: 'flex', 
-                flexDirection: 'column'
-            }}>
+            <SideDrawer showState = {props.showDrawer} toggleSidebar = {props.toggleSidebar} />
+            <main 
+                style = {{
+                    flex: 1, 
+                    display: 'flex', 
+                    flexDirection: 'column'
+                }}
+            >
                 {props.children}
             </main> 
         </div>

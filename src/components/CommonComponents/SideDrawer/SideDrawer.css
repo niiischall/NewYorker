@@ -5,12 +5,25 @@
     flex-direction: column;
     background-color: var(--color-background-sidebar);
     border: 1px solid var(--color-border-sidebar);
+    transition: transform 0.3s ease-out;
+
 }
 
 @media (max-width: 75em){
     .layoutSidebar {
-        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 200;
     }
+}
+
+.Open {
+    transform: translateX(0);
+}
+
+.Close {
+    transform: translateX(-100%);
 }
 
 .sidebarLogo{
@@ -37,6 +50,13 @@
     align-items: center;
 }
 
+@media (max-width: 56.25em){
+    .sidebarLink {
+        font-size: 2.5rem;
+        font-size: 400;
+    }
+}
+
 .sidebarLinkActive{
     display: block;
     padding: 10px 0px 10px 40px;
@@ -51,6 +71,15 @@
     align-items: center;
     transition: all .5s;
 }
+
+
+@media (max-width: 56.25em){
+    .sidebarLinkActive {
+        font-size: 2.5rem;
+        font-size: 400;
+    }
+}
+
 
 .Icon{
     width: 17.5px;
