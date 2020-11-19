@@ -64,7 +64,7 @@
 
 @media (max-width: 56.2em){
     .CarouselContainer ul{
-        width: 51.5rem;
+        width: 47.5rem;
     }
 }
 
@@ -80,7 +80,7 @@
 
 @media (max-width: 56.2em){
     .CarouselContainer{
-        width: 100%!important;
+        width: 47.5rem!important;
     }
 }
 
@@ -184,19 +184,27 @@
 
 @media (max-width: 56.2em){
     .contentMainArticles{
-        width: 51.5rem;
-        height: 51.5rem;
+        width: 47.5rem;
+        height: auto;
         flex-direction: column;
+        border-radius: 0rem;
     }
 }
 
 
 .contentContainer{
+    width: 100%;
     height: 100%;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+@media(max-width: 56.2em){
+    .contentContainer{
+        text-align: center;
+    }
 }
 
 .imageContainer{
@@ -206,7 +214,7 @@
 
 @media (max-width: 56.2em){
     .imageContainer{
-        width: 51.5rem;
+        width: 47.5rem;
         height: 27.5rem;
     }
 }
@@ -255,6 +263,7 @@
         width: 100%;
         font-size: 1.75rem;
         font-weight: 400;
+        margin-bottom: 0rem;
     }
 }
 
