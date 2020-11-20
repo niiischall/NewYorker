@@ -25,7 +25,7 @@ const SideDrawer = (props) => {
             </div>
             <div className = {classes.sidebarContent}>
                 <ul>
-                    <li className = {classes.sidebarItem}>
+                    <li className = {classes.sidebarItem} onClick = {props.toggleSidebar}>
                         <NavLink 
                             to = "/home"
                             className = {classes.sidebarLink} 
@@ -40,7 +40,7 @@ const SideDrawer = (props) => {
                             Dashboard
                         </NavLink>
                     </li>
-                    <li className = {classes.sidebarItem}>
+                    <li className = {classes.sidebarItem} onClick = {props.toggleSidebar}>
                         <NavLink 
                             to = "/articles"
                             className = {classes.sidebarLink} 

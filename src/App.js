@@ -45,7 +45,12 @@ const App = (props) => {
           )}
         />
         <Route path = "/analytics" component = {Analytics} />
-        <Route path = "/articles" component = {Articles} />
+        <Route 
+          path    = "/articles" 
+          render  = {(props) => (
+            <Articles {...props} toggleSidebar = {toggleSidebar} />
+          )}   
+        />
         <Route path = "/home" component = {Dashboard} />
         <Route path = "/" exact>
           <Redirect to = "/home" />

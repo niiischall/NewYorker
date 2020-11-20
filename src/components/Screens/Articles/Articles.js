@@ -3,7 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import classes from './Articles.css';
 
+import useDimensions from '../../../Services/Dimensions';
+
 const Articles = (props) => {
+
+    const { width } = useDimensions();
 
     const searchedQuery = useSelector(store => store.articleSearch.searchQuery); 
     const articles      = useSelector(store => store.articleSearch.articles);
@@ -77,7 +81,11 @@ const Articles = (props) => {
                                         {article.byline.original}
                                     </span>
                                     <span className = {classes.abstract}>
-                                        {article.abstract.substring(0, 175)}...
+                                        {
+                                            width < 500 
+                                            ? article.abstract.substring(0, 70)
+                                            : article.abstract.substring(0, 170)
+                                        }...
                                     </span>
                                 </div>
                                 <div 
@@ -105,6 +113,21 @@ const Articles = (props) => {
 
     return (
         <div className = {classes.layoutContent}>
+            <div style = {{
+                width: '100%',
+                height: '10rem',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+                paddingTop: '27px'
+            }}>
+                <img 
+                    className = {classes.drawerLogo}
+                    src       = "assets/images/icons-menu.png" 
+                    alt       = "Side drawer" 
+                    onClick   = {props.toggleSidebar}
+                />
+            </div>
             {content}
         </div>
     )
