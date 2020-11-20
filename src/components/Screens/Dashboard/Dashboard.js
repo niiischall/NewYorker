@@ -24,7 +24,8 @@ const Dashboard = (props) => {
         dispatch(actions.inputArticleSearch(event.target.value));
     }
 
-    const submitSearch = () => {
+    const submitSearch = (event) => {
+        event.preventDefault();
         dispatch(actions.fetchArticles(searchQuery));
     }
 
@@ -224,37 +225,53 @@ const Dashboard = (props) => {
 
     return(
     <div className = {classes.layoutContent}>
+        <div style = {{
+            display: 'flex',
+            textAlign: 'center'
+        }}>
+            <img 
+                className = {classes.drawerLogo}
+                src       = "assets/images/icons-menu.png" 
+                alt       = "Side drawer"
+                onClick   = {props.toggleSidebar} 
+            />
             <div className = {classes.contentSearch}>
                 <img 
                     src       = "assets/images/magnifying-glass.svg" 
                     className = {classes.searchInputLogo}
                     alt       = "Search"
                 />
-                <input 
-                    placeholder = "What's on your mind?" 
-                    type        = "text" 
-                    className   = {classes.searchInput}
-                    onChange    = {handleSearchInput} 
-                    value       = {searchQuery}
-                />
-                <button 
-                    className = {classes.searchButton}
-                    onClick   = {submitSearch}
-                    style     = {
-                        searchQuery 
-                        ? {
-                            backgroundColor: 'var(--color-white)',
-                            color: 'var(--color-item-selected-sidebar)',
-                            border: '.2rem solid var(--color-border-sidebar)',
-                            boxShadow: '0 0 .5rem 0.05rem var(--color-border-sidebar)'
-                          }
-                        : null
-                    }
+                <form 
+                    onSubmit  = {submitSearch}
+                    className = {classes.formStyling} 
                 >
-                    Search
-                </button>
+                    <input 
+                        placeholder = "What's on your mind?" 
+                        type        = "text" 
+                        className   = {classes.searchInput}
+                        onChange    = {handleSearchInput} 
+                        value       = {searchQuery}
+                    />
+                    <button 
+                        className = {classes.searchButton}
+                        style     = {
+                            searchQuery 
+                            ?
+                            {
+                                backgroundColor: 'var(--color-white)',
+                                color: 'var(--color-item-selected-sidebar)',
+                                border: '.2rem solid var(--color-border-sidebar)',
+                                boxShadow: '0 0 .5rem 0.05rem var(--color-border-sidebar)'
+                            }
+                            : null
+                        }
+                    >
+                        Search
+                    </button>
+                </form>
             </div>
-            {content}
+        </div>
+        {content}
         </div>
     )
 }

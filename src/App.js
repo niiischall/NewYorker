@@ -51,7 +51,12 @@ const App = (props) => {
             <Articles {...props} toggleSidebar = {toggleSidebar} />
           )}   
         />
-        <Route path = "/home" component = {Dashboard} />
+        <Route 
+          path = "/home" 
+          render  = {(props) => (
+            <Dashboard {...props} toggleSidebar = {toggleSidebar} />
+          )} 
+        />
         <Route path = "/" exact>
           <Redirect to = "/home" />
         </Route>
