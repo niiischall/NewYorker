@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import classes from './Analytics.css';
+import * as actions from '../../../Store/actions/analytics';
 
 const Analytics = (props) => {
-    
+
+    const dispatch      = useDispatch();
     const searchedQuery = useSelector(store => store.articleSearch.searchQuery); 
+
+    useEffect(() => {
+        if(searchedQuery){
+            dispatch(actions.analytics(searchedQuery));
+        }
+    }, [searchedQuery]);
 
     let content = (
         <div 
@@ -44,7 +52,7 @@ const Analytics = (props) => {
                     onClick   = {props.toggleSidebar}
                 />
                 <p className = {classes.contentHeadingText}>
-                    Analytics on the topic of "{searchedQuery}", brought to you by <span className = {classes.Bold}>NYTimes.com</span>...
+                    Analytics on the topic of <span className = {classes.Bold}>"{searchedQuery}"</span>, brought to you by <span className = {classes.Bold}>NYTimes.com</span>...
                 </p>
             </div>
         )

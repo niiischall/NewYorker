@@ -1,20 +1,26 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import Chart   from "react-apexcharts";
 import classes from './Dashboard.css';
 
-import * as actions from '../../../Store/actions/articleSearch';
-import Spinner from '../../CommonComponents/Spinner/Spinner';
+import * as actions          from '../../../Store/actions/articleSearch';
+import * as analyticsActions from '../../../Store/actions/analytics';
+import Spinner               from '../../CommonComponents/Spinner/Spinner';
 
 const Dashboard = (props) => {
     const dispatch = useDispatch();
 
-    const articles     = useSelector(store => store.articleSearch.articles);
     const searchQuery  = useSelector(store => store.articleSearch.searchQuery);
+
+    const articles     = useSelector(store => store.articleSearch.articles);
     const pages        = useSelector(store => store.articleSearch.pages);
-    const pageLoader   = useSelector(store => store.articleSearch.pageLoader);
     const selectedPage = useSelector(store => store.articleSearch.selectedPage);
-    const isLoading    = useSelector(store => store.articleSearch.articleSearchLoader);
+    const analytics    = useSelector(store => store.analytics.analytics);
+    
+    const isLoading       = useSelector(store => store.articleSearch.articleSearchLoader);
+    const pageLoader      = useSelector(store => store.articleSearch.pageLoader);
+    const analyticsLoader = useSelector(store => store.analytics.analyticsLoader);
 
     const paginationHandler = (page) => {
         dispatch(actions.fetchNewPage(searchQuery, page));
@@ -27,14 +33,15 @@ const Dashboard = (props) => {
     const submitSearch = (event) => {
         event.preventDefault();
         dispatch(actions.fetchArticles(searchQuery));
+        dispatch(analyticsActions.analytics(searchQuery));
     }
 
     let content = null;
 
-    if(isLoading)
+    if(isLoading && analyticsLoader)
         content = <Spinner />;
 
-    if(!isLoading && articles.length === 0){
+    if(!isLoading && !analyticsLoader && articles.length === 0 && analytics.length === 0){
         content = (
             <div 
                 className = {classes.contentMain}
@@ -56,7 +63,7 @@ const Dashboard = (props) => {
         )
     }
 
-    if(!isLoading && articles.length !== 0){
+    if(!isLoading && !analyticsLoader && articles.length !== 0 && analytics.length !== 0){
         content = (
             <div className = {classes.contentMain}>
                 <div>
@@ -207,8 +214,29 @@ const Dashboard = (props) => {
                         <div className = {classes.contentMainGraph}>
                             <div className = {classes.articlesHeading}>
                                 <p className = {classes.articlesHeadingText}>
-                                    NUMBER OF ARTICLES PUBLISHED FOR “Elections”
+                                    NUMBER OF ARTICLES PUBLISHED FOR “{searchQuery}”
                                 </p>
+                                <Chart
+                                    options = {{
+                                        chart: {id: "basic-bar"},
+                                        xaxis: {
+                                            categories: analytics.map((year) => year.term)
+                                        },
+                                        dataLabels: {
+                                            enabled: false
+                                        },
+                                        stroke: {
+                                            curve: 'straight'
+                                        }
+                                    }}
+                                    series  = {[{
+                                        name: "Number of articles published for " + searchQuery,
+                                        data: analytics.map((year) => year.count)
+                                    }]}
+                                    type   = "area"
+                                    width  = "925"
+                                    height = "350"
+                              />
                             </div>
                         </div>
                         <span className = {classes.contentToggleText}>

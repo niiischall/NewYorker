@@ -5,6 +5,7 @@ const apiURL = {
     mostViewed:  baseURL + 'mostpopular/v2/viewed/1.json?' + API_KEY,
     topStories:  baseURL + 'topstories/v2/',
     articleSearch: baseURL + 'search/v2/articlesearch.json?q=',
+    analyticsSearch: baseURL
 }
 
 export default apiURL;
