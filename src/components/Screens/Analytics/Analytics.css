@@ -1,5 +1,84 @@
-.layoutMain{
+.layoutContent{
     display: flex;
-    flex-direction: row;
-    width: 100%;
+    flex-direction: column;
+    flex: 1;
+    padding: 0px 3.5rem;
+    background-color: var(--color-background-content);
 }
+
+@media (max-width: 75em){
+    .layoutContent{
+      align-items: center;
+      height: 100vh;
+    }
+}
+
+@media (max-width: 37.5em){
+    .layoutContent{
+      padding: 0 1.5rem;
+    }
+}
+
+.contentMain{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+}
+
+.contentMainHeadline{
+    width: 75%;
+    margin: 3.5rem 0rem;
+    text-align: center;
+}
+
+.contentMainHeadlineText{
+    font-size: 4rem;
+    color: #7B8C92;
+    font-weight: 700;
+}
+
+.contentMainPlaceholder{
+    margin-bottom: 16px;
+}
+
+.contentPlaceholderImg{
+    width: 30rem;
+    height: 30rem;
+}
+
+.drawerLogo{
+    width: 3.5rem;
+    height: 3.5rem; 
+    margin-right: 1rem;
+    overflow: hidden;
+    flex:start;
+    cursor: pointer;
+}
+
+@media (min-width: 75em){
+    .drawerLogo{
+        display: none;
+    }
+}
+
+.contentHeadingText{
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: var(--color-heading-text);
+    margin: 3rem 0rem;
+}
+
+@media (max-width: 75em){
+    .contentHeadingText{
+        text-align: center;
+        width: 85%;
+    }
+}
+
+.Bold{
+    color: var(--color-item-sidebar);
+    font-weight: 700;
+}
+

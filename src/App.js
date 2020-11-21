@@ -44,7 +44,12 @@ const App = (props) => {
             <TopStories {...props} toggleSidebar = {toggleSidebar} />
           )}
         />
-        <Route path = "/analytics" component = {Analytics} />
+        <Route 
+          path = "/analytics" 
+          render = {(props) => (
+            <Analytics {...props} toggleSidebar = {toggleSidebar} />
+          )}
+        />
         <Route 
           path    = "/articles" 
           render  = {(props) => (
