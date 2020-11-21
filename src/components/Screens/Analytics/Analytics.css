@@ -86,10 +86,20 @@
 
 .contentMainGraph{
     background-color: var(--color-white);
+    width: 75%;
     height: 45rem;
-    margin-top: 3.5rem;
-    margin-bottom: 3rem;
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border-radius: .8rem;
     box-shadow: .2rem .8rem 1.9rem var(--color-shadaow);
 }
 
+.articlesHeadingText{
+    text-transform: uppercase;
+    color: var(--color-heading-text);
+    font-weight: 700;
+    font-size: 2rem;
+}

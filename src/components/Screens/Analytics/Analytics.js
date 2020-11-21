@@ -1,10 +1,11 @@
 import React, { useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import classes from './Analytics.css';
-import * as actions from '../../../Store/actions/analytics';
+import ReactApexChart from 'react-apexcharts'
 
-import Spinner from '../../CommonComponents/Spinner/Spinner';
+import classes      from './Analytics.css';
+import * as actions from '../../../Store/actions/analytics';
+import Spinner      from '../../CommonComponents/Spinner/Spinner';
 
 const Analytics = (props) => {
 
@@ -16,6 +17,10 @@ const Analytics = (props) => {
     const source   = useSelector(store => store.analytics.analyticsSource);
     const material = useSelector(store => store.analytics.analyticsMaterial);
     const document = useSelector(store => store.analytics.analyticsDocument);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
 
     const fetchAnalytics = useCallback(() => {
         if(searchedQuery && source.length === 0 && material.length === 0 && document.length === 0){
@@ -85,17 +90,133 @@ const Analytics = (props) => {
         <div>
             <div style = {{marginBottom: '3rem'}}>
                 <div className = {classes.contentMainGraph}>
-                    &nbsp;
+                    <p className = {classes.articlesHeadingText}>
+                        SOURCES THAT WROTE ABOUT “{searchedQuery}.”
+                    </p>
+                    <ReactApexChart 
+                        series  = {source.map(source => source.count)}
+                        options = {{
+                            chart: {
+                                width: 600,
+                                type: 'pie',
+                            },
+                            labels: source.map(source => source.term),
+                            responsive: [{
+                                breakpoint: 480,
+                                options: {
+                                    chart: {
+                                        width: 200
+                                    },
+                                    legend: {
+                                        position: 'bottom'
+                                    }
+                                }   
+                            }]
+                        }}
+                        type  = "pie" 
+                        width = {600}
+                    />
                 </div>
             </div>
             <div style = {{marginBottom: '3rem'}}>
                 <div className = {classes.contentMainGraph}>
-                    &nbsp;
+                    <p className = {classes.articlesHeadingText}>
+                       NEWS SECTIONS WHICH MENTIONED “{searchedQuery}."
+                    </p>
+                    <ReactApexChart 
+                        options = {{
+                            chart: {
+                                height: 390,
+                                type: 'radialBar',
+                            },
+                            plotOptions: {
+                                radialBar: {
+                                    offsetY: 0,
+                                    startAngle: 0,
+                                    endAngle: 270,
+                                    hollow: {
+                                        margin: 5,
+                                        size: '30%',
+                                        background: 'transparent',
+                                        image: undefined,
+                                    },
+                                    dataLabels: {
+                                        name: {
+                                            show: false,
+                                        },
+                                        value: {
+                                            show: false,
+                                        }
+                                    }
+                                }
+                            },
+                            colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+                            labels: material.map(source => source.term) ,
+                            legend: {
+                                show: true,
+                                floating: true,
+                                fontSize: '16px',
+                                position: 'left',
+                                offsetX: 450,
+                                offsetY: 0,
+                                labels: {
+                                  useSeriesColors: true,
+                                },
+                                markers: {
+                                  size: 0
+                                },
+                                formatter: function(seriesName, opts) {
+                                  return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
+                                },
+                                itemMargin: {
+                                  vertical: 3
+                                }
+                            },
+                            responsive: [{
+                                breakpoint: 480,
+                                options: {
+                                  legend: {
+                                      show: false
+                                  }
+                                }
+                            }]
+                        }} 
+                        series  = {material.map(source => source.count)} 
+                        type    = "radialBar" 
+                        height  = {390} 
+                        width   = {600}
+                    />
                 </div>
             </div>
             <div style = {{marginBottom: '3rem'}}>
                 <div className = {classes.contentMainGraph}>
-                    &nbsp;
+                    <p className = {classes.articlesHeadingText}>
+                        SUBJECT CONTENT ON “{searchedQuery}."
+                    </p>
+                    <ReactApexChart 
+                        options = {{
+                          chart: {
+                            type: 'donut',
+                          },
+                          labels: document.map(document => document.term),
+                          responsive: [{
+                            breakpoint: 480,
+                            options: {
+                                chart: {
+                                    width: 200
+                                },
+                                labels: document.map(document => document.term),
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
+                          }]
+                        }} 
+                        series  = {document.map(document => document.count)} 
+                        type    = "donut" 
+                        height  = {350} 
+                        width   = {550}
+                    />
                 </div>               
             </div>
         </div>

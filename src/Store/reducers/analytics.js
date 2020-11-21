@@ -20,6 +20,9 @@ const analyticsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 analytics: action.analytics.sort((a,b) => new Date(a.term) - new Date(b.term)),
+                analyticsSource: [],
+                analyticsMaterial: [],
+                analyticsDocument: [],
                 analyticsLoader: false
             }
         case actionTypes.ANALYTICS_FAILED:
