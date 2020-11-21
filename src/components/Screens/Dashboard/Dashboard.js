@@ -111,7 +111,7 @@ const Dashboard = (props) => {
                             Source
                         </span>
                     </div>
-                    {   !pageLoader
+                    {   !pageLoader && !analyticsLoader 
                         ?articles.map((article, index) => {
 
                             let publishedDate = "";

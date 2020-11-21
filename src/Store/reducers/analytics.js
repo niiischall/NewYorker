@@ -2,7 +2,11 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     analytics: [],
-    analyticsLoader: false
+    analyticsSource: [],
+    analyticsMaterial: [],
+    analyticsDocument: [],
+    analyticsLoader: false,
+    detailedAnalyticsLoader: false
 }
 
 const analyticsReducer = (state = initialState, action) => {
@@ -22,6 +26,36 @@ const analyticsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 analyticsLoader: false
+            }
+        case actionTypes.ANALYTICS_DETAILS_START:
+            return {
+                ...state,
+                detailedAnalyticsLoader: true
+            }
+        case actionTypes.ANALYTICS_DETAILS_SUCCESS:
+            if(action.field === 'source')
+                return {
+                    ...state,
+                    analyticsSource: action.detailAnalytics,
+                    detailedAnalyticsLoader: false
+                }
+            else if(action.field === 'news_desk')
+                return {
+                    ...state,
+                    analyticsMaterial: action.detailAnalytics,
+                    detailedAnalyticsLoader: false
+                }
+            else if(action.field === 'document_type')
+                return {
+                    ...state,
+                    analyticsDocument: action.detailAnalytics,
+                    detailedAnalyticsLoader: false
+                }
+            break;
+        case actionTypes.ANALYTICS_DETAILS_FAILURE:
+            return {
+                ...state,
+                detailedAnalyticsLoader: false
             }
         default:
             return state;

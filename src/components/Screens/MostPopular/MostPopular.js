@@ -14,7 +14,8 @@ const MostPopular = React.memo((props) => {
     const [ storiesLimit, setStoriesLimit ] = useState(5);
 
     const getMostViewed = () => {
-        dispatch(actionStories.mostPopular());
+        if(mostViewed.length === 0)
+            dispatch(actionStories.mostPopular());
     };
 
     useEffect(() => {

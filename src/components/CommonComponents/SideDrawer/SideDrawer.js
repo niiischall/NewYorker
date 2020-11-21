@@ -54,7 +54,7 @@ const SideDrawer = (props) => {
                             Articles
                         </NavLink>
                     </li>
-                    <li className = {classes.sidebarItem}>
+                    <li className = {classes.sidebarItem} onClick = {props.toggleSidebar}>
                         <NavLink 
                             to = "/analytics" 
                             className = {classes.sidebarLink}
