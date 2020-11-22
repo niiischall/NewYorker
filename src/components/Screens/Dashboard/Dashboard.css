@@ -119,6 +119,13 @@
     justify-content: space-between;
 }
 
+@media (max-width: 56.2em){
+    .contentMainArticles{
+        width: 95vw; 
+        height: auto;
+    }
+}
+
 .contentMainHeadline{
     width: 75%;
     margin: 3.5rem 0rem;
@@ -136,6 +143,16 @@
     padding: 3rem 0rem 0rem 4rem;
 }
 
+@media (max-width: 56.2em){
+    .articlesHeading {
+        padding: 2rem;
+        padding-bottom: 0rem;
+        width: 100%;
+        text-align: center;
+    } 
+}
+
+
 .articlesHeadingText{
     text-transform: uppercase;
     color: var(--color-heading-text);
@@ -151,25 +168,62 @@
     justify-content: start;
 }
 
+@media (max-width: 56.2em){
+    .articlesColumnHeading {
+        width:auto;
+    } 
+}
+
 .articlesColumnHeadings{
     color: var(--color-heading-text);
     font-size: 1.4rem;
+}
+
+@media (max-width: 56.2em){
+    .articlesColumnHeadings{
+        color: var(--color-item-sidebar);
+        font-size: 1.75rem;
+    } 
 }
 
 .headingDate{
     width: 12.5rem;
 }
 
+@media (max-width: 56.2em){
+    .headingDate {
+        margin-right: 2rem;
+    } 
+}
+
 .headingHeadline{
     width: 20rem;
+}
+
+@media (max-width: 56.2em){
+    .headingHeadline {
+        margin-right: 41rem;
+    } 
 }
 
 .headingSummary{
     width: 25rem;
 }
 
+@media (max-width: 56.2em){
+    .headingSummary{
+        margin-right: 36rem
+    } 
+}
+
 .headingUrl{
     width: 25rem;
+}
+
+@media (max-width: 56.2em){
+    .headingUrl{
+        margin-right: 39rem;
+    } 
 }
 
 .headingSource{
@@ -187,10 +241,28 @@
     justify-content:start;
 }
 
+@media (max-width: 56.2em){
+    .articlesColumn {
+        width:fit-content;
+    } 
+}
+
 .articlesColumns{
     width: 12.5rem;
     font-size: 1.2rem;
     color: var(--color-heading-text);
+}
+
+@media (max-width: 56.2em){
+    .articlesColumns{
+        font-size: 1.75rem;
+    } 
+}
+
+@media (max-width: 56.2em){
+    .columnsDate{
+        margin-right: 1.45rem;
+    }
 }
 
 .columnsHeadline{
@@ -198,14 +270,32 @@
     padding-right: 1rem;
 }
 
+@media (max-width: 56.2em){
+    .columnsHeadline{
+        width: 47.5rem;
+    }
+}
+
 .columnsSummary{
     width: 25rem;
     padding-right: 1rem;
 }
 
+@media (max-width: 56.2em){
+    .columnsSummary{
+        width: 44rem;
+    }
+}
+
 .columnsUrl{
     width: 25rem;
     padding-right: 1rem;
+}
+
+@media (max-width: 56.2em){
+    .columnsUrl{
+        width: 42rem;
+    }
 }
 
 .columnsUrlLink{
@@ -216,6 +306,12 @@
 
 .columnsSource{
     width: 10rem;
+}
+
+@media (max-width: 56.2em){
+    .columnsSource{
+        width: 20rem;
+    }
 }
 
 .contentToggle{
@@ -277,6 +373,7 @@
         text-align: center;
         font-size: 2.25rem;
         width: 85%;
+        margin-bottom: 3rem;
     }
 }
 
@@ -382,3 +479,14 @@
        width: 100%;
     }
 }
+
+@media (max-width: 56.2em){
+    .ScrollableContainer{
+        width: 100%;
+        overflow: hidden;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+}
+

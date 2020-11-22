@@ -73,69 +73,70 @@ const Dashboard = (props) => {
                         Here are your search results for, “{searchQuery}.”
                     </p>
                 </div>
-                <div className = {classes.contentMainArticles}>
+                <div 
+                    className = {classes.contentMainArticles}
+                >
                     <div className = {classes.articlesHeading}>
                         <p className = {classes.articlesHeadingText}>
                             articles
                         </p>
                     </div>
-                    <div 
-                        className = {classes.articlesColumnHeading} 
-                    >
-                        <span className = {[
+                    <div className = {classes.ScrollableContainer}>
+                        <div className = {classes.articlesColumnHeading}>
+                            <span className = {[
                                 classes.articlesColumnHeadings,
                                 classes.headingDate
-                        ].join(' ')}>
-                            Published Date
-                        </span>
-                        <span className = {[
-                            classes.articlesColumnHeadings,
-                            classes.headingHeadline
-                        ].join(' ')}>
-                            Headline
-                        </span>
-                        <span className = {[
-                            classes.articlesColumnHeadings,
-                            classes.headingSummary
-                        ].join(' ')}>
-                            Summary
-                        </span>
-                        <span className = {[
-                            classes.articlesColumnHeadings,
-                            classes.headingUrl
-                        ].join(' ')}>
-                            URL
-                        </span>
-                        <span className = {[
-                            classes.articlesColumnHeadings, 
-                            classes.headingSource
-                        ].join(' ')}>
-                            Source
-                        </span>
-                    </div>
-                    {   !pageLoader && !analyticsLoader 
-                        ?articles.map((article, index) => {
+                            ].join(' ')}>
+                                Published Date
+                            </span>
+                            <span className = {[
+                                classes.articlesColumnHeadings,
+                                classes.headingHeadline
+                            ].join(' ')}>
+                                Headline
+                            </span>
+                            <span className = {[
+                                classes.articlesColumnHeadings,
+                                classes.headingSummary
+                            ].join(' ')}>
+                                Summary
+                            </span>
+                            <span className = {[
+                                classes.articlesColumnHeadings,
+                                classes.headingUrl
+                            ].join(' ')}>
+                                URL
+                            </span>
+                            <span className = {[
+                                classes.articlesColumnHeadings, 
+                                classes.headingSource
+                            ].join(' ')}>
+                                Source
+                            </span>
+                        </div>
+                        {
+                            !pageLoader && !analyticsLoader 
+                                ?articles.map((article, index) => {
+                                    let publishedDate = "";
+                                let d     = new Date(article.pub_date);
+                                let day   = d.getDate();
+                                let month = d.getMonth() + 1;
+                                let year  = d.getFullYear();
+                                if (month.length < 2) 
+                                    month = '0' + month;
+                                if (day.length < 2) 
+                                    day = '0' + day;
+                                publishedDate = [day, month, year].join('-');
 
-                            let publishedDate = "";
-                            let d     = new Date(article.pub_date);
-                            let day   = d.getDate();
-                            let month = d.getMonth() + 1;
-                            let year  = d.getFullYear();
-                            if (month.length < 2) 
-                                month = '0' + month;
-                            if (day.length < 2) 
-                                day = '0' + day;
-                            publishedDate = [day, month, year].join('-');
+                                let classStyling = [classes.articlesColumn];
 
-                            let classStyling = [classes.articlesColumn];
+                                if(index % 2 === 0){
+                                    classStyling.push(classes.greyed);
+                                }
 
-                            if(index % 2 === 0){
-                                classStyling.push(classes.greyed);
-                            }
+                                let returnedArticle = null;
 
-                            let returnedArticle = null;
-
-                            if(index < 5)
+                                if(index < 5)
                                 returnedArticle = (
                                     <div 
                                         className = {classStyling.join(' ')}
@@ -182,8 +183,9 @@ const Dashboard = (props) => {
                                 )
                             return returnedArticle;
                             })
-                        : <Spinner/> 
-                    }
+                            : <Spinner/> 
+                        }
+                    </div>
                     </div>                       
                     <div className = {classes.contentToggle}>
                         <span className = {classes.contentToggleText}>
@@ -257,9 +259,9 @@ const Dashboard = (props) => {
                             >
                             'Analytics'</NavLink> section.
                         </span>
-                    </div>   
-            )
-        }
+                    </div>
+                )
+            }
     
 
     return(
