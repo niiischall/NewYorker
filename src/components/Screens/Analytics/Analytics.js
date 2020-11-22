@@ -94,7 +94,7 @@ const Analytics = (props) => {
     if(source.length !== 0 && material.length !== 0 && document.length !== 0)
       mainContent = (
         <div className = {classes.GraphContainer}>
-            <div style = {{padding: '2rem 0', marginBottom: '3rem'}}>
+            <div style = {{padding: '5rem 0', marginBottom: '3rem'}}>
             <div style = {{overflow: 'hidden'}}>
                 <div className = {classes.contentMainGraph}>
                     <p className = {classes.articlesHeadingText}>
