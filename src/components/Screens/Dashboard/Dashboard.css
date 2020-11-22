@@ -482,6 +482,13 @@
     }
 }
 
+.ScrollableContainer{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 @media (max-width: 56.2em){
     .ScrollableContainer{
         width: 100%;
