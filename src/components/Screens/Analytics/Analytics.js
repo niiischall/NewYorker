@@ -2,16 +2,13 @@ import React, { useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ReactApexChart from 'react-apexcharts'
-import useDimensions  from '../../../Services/Dimensions';
 
 import classes      from './Analytics.css';
 import * as actions from '../../../Store/actions/analytics';
 import Spinner      from '../../CommonComponents/Spinner/Spinner';
 
 const Analytics = (props) => {
-
     const dispatch      = useDispatch();
-    const { width }     = useDimensions();
 
     const searchedQuery = useSelector(store => store.articleSearch.searchQuery); 
     const analytics     = useSelector(store => store.analytics.analytics);
@@ -114,8 +111,7 @@ const Analytics = (props) => {
                                 breakpoint: 500,
                                 options: {
                                     chart: {
-                                        width: 350,
-                                        height: 300
+                                        width: 350
                                     },
                                     legend: {
                                         position: 'bottom'
@@ -125,7 +121,6 @@ const Analytics = (props) => {
                         }}
                         type   = "pie" 
                         width  = {600}
-                        height = {width < 500 ? 150 : 300}
                     />
                 </div>
             </div>
