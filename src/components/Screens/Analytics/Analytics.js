@@ -43,6 +43,12 @@ const Analytics = (props) => {
             className = {classes.contentMain}
             style = {{alignItems: 'center'}}
         >
+            <img 
+                className = {classes.drawerLogo}
+                src       = "assets/images/icons-menu.png" 
+                alt       = "Side Drawer" 
+                onClick   = {props.toggleSidebar}
+            />
             <div className= {classes.contentMainHeadline}>
                 <p className = {classes.contentMainHeadlineText}>
                     We can't seem to find any searches yet. Check out our <NavLink 
@@ -87,7 +93,7 @@ const Analytics = (props) => {
     
     if(source.length !== 0 && material.length !== 0 && document.length !== 0)
       mainContent = (
-        <div>
+        <div className = {classes.GraphContainer}>
             <div style = {{marginBottom: '3rem'}}>
                 <div className = {classes.contentMainGraph}>
                     <p className = {classes.articlesHeadingText}>
@@ -102,13 +108,14 @@ const Analytics = (props) => {
                             },
                             labels: source.map(source => source.term),
                             responsive: [{
-                                breakpoint: 480,
+                                breakpoint: 500,
                                 options: {
                                     chart: {
-                                        width: 200
+                                        width: 380
                                     },
                                     legend: {
-                                        position: 'bottom'
+                                        position: 'bottom',
+                                        textAlign: 'center'
                                     }
                                 }   
                             }]
@@ -155,29 +162,37 @@ const Analytics = (props) => {
                             legend: {
                                 show: true,
                                 floating: true,
-                                fontSize: '16px',
+                                fontSize: '13px',
                                 position: 'left',
-                                offsetX: 450,
+                                offsetX: 100,
                                 offsetY: 0,
                                 labels: {
                                   useSeriesColors: true,
                                 },
                                 markers: {
-                                  size: 0
+                                  width: 0,
+                                  height: 0
                                 },
                                 formatter: function(seriesName, opts) {
                                   return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
                                 },
                                 itemMargin: {
-                                  vertical: 3
+                                  vertical: 0
                                 }
                             },
                             responsive: [{
-                                breakpoint: 480,
+                                breakpoint: 500,
                                 options: {
-                                  legend: {
-                                      show: false
-                                  }
+                                    chart: {
+                                        width: 300,
+                                        height: 300
+                                    },
+                                    legend: {
+                                      show: true,
+                                      offsetX: 0,
+                                      offsetY: 0,
+                                      fontSize: '10px',
+                                    }
                                 }
                             }]
                         }} 
@@ -200,10 +215,11 @@ const Analytics = (props) => {
                           },
                           labels: document.map(document => document.term),
                           responsive: [{
-                            breakpoint: 480,
+                            breakpoint: 500,
                             options: {
                                 chart: {
-                                    width: 200
+                                    width: 400,
+                                    height: 325
                                 },
                                 labels: document.map(document => document.term),
                                 legend: {

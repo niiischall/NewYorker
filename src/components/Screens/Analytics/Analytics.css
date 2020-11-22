@@ -16,7 +16,7 @@
 
 @media (max-width: 37.5em){
     .layoutContent{
-      padding: 0 1.5rem;
+      padding: 0 1rem;
     }
 }
 
@@ -24,7 +24,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: space-between;
 }
 
@@ -55,8 +55,8 @@
     margin-right: 1rem;
     margin-top: 3rem;
     overflow: hidden;
-    flex:start;
     cursor: pointer;
+    align-self: flex-start;
 }
 
 @media (min-width: 75em){
@@ -95,6 +95,18 @@
     align-items: center;
     border-radius: .8rem;
     box-shadow: .2rem .8rem 1.9rem var(--color-shadaow);
+}
+
+@media (max-width: 75em){
+    .GraphContainer{
+        width: 90%;
+    }
+}
+
+@media (max-width: 75em){
+    .contentMainGraph{
+        width: 100%;
+    }
 }
 
 .articlesHeadingText{
