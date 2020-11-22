@@ -184,7 +184,7 @@ const Dashboard = (props) => {
                             })
                         : <Spinner/> 
                     }
-                    </div>                        
+                    </div>                       
                     <div className = {classes.contentToggle}>
                         <span className = {classes.contentToggleText}>
                             Check out the articles in detail in the <NavLink to = "/articles" 
@@ -235,8 +235,8 @@ const Dashboard = (props) => {
                                             breakpoint: 500,
                                             options: {
                                                 chart: {
-                                                    width: 300,
-                                                    height: 300
+                                                    width: width < 500 ? 0.95* width : 300,
+                                                    height: 280
                                                 }
                                             }
                                         }]
@@ -246,12 +246,12 @@ const Dashboard = (props) => {
                                         data: analytics.map((year) => year.count)
                                     }]}
                                     type   = "area"
-                                    width  = {width < 500 ? "360" : "1000"}
-                                    height = {width < 500 ? "275" : "350"}
+                                    width  = {width < 500 ? "360": "1000"}
+                                    height = {width < 500 ? "275": "350"}
                               />
                             </div>
                         </div>
-                        <span className = {classes.contentToggleText}>
+                        <span className = {classes.contentGraphToggleText}>
                             Check out the analytics in detail in the <NavLink to = "/analytics" 
                                 style = {{color: 'var( --color-item-selected-sidebar)'}}
                             >
