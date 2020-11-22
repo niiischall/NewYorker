@@ -111,7 +111,7 @@ const Analytics = (props) => {
                                 breakpoint: 500,
                                 options: {
                                     chart: {
-                                        width: 500,
+                                        width: 400,
                                         height: 300
                                     },
                                 }   
