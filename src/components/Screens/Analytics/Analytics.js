@@ -112,10 +112,7 @@ const Analytics = (props) => {
                                 options: {
                                     chart: {
                                         width: 380,
-                                        height: 300
-                                    },
-                                    legend: {
-                                        position: 'bottom'
+                                        height: 400
                                     }
                                 }   
                             }]
@@ -219,7 +216,7 @@ const Analytics = (props) => {
                             options: {
                                 chart: {
                                     width: 400,
-                                    height: 325
+                                    height: 250
                                 },
                                 labels: document.map(document => document.term),
                                 legend: {
