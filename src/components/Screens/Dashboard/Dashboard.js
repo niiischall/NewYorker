@@ -7,9 +7,11 @@ import classes from './Dashboard.css';
 import * as actions          from '../../../Store/actions/articleSearch';
 import * as analyticsActions from '../../../Store/actions/analytics';
 import Spinner               from '../../CommonComponents/Spinner/Spinner';
+import useDimensions         from '../../../Services/Dimensions';
 
 const Dashboard = (props) => {
     const dispatch = useDispatch();
+    const { width } = useDimensions();
 
     const searchQuery  = useSelector(store => store.articleSearch.searchQuery);
 
@@ -210,12 +212,13 @@ const Dashboard = (props) => {
                             }
                         </ul>
                     </div>
-                    <div style = {{marginBottom: '3rem'}}>
+                    <div className = {classes.graphContainer}>
                         <div className = {classes.contentMainGraph}>
-                            <div className = {classes.articlesHeading}>
-                                <p className = {classes.articlesHeadingText}>
+                            <div className = {classes.graphsHeading}>
+                                <p className = {classes.graphsHeadingText}>
                                     NUMBER OF ARTICLES PUBLISHED FOR “{searchQuery}”
                                 </p>
+                            </div>
                                 <Chart
                                     options = {{
                                         chart: {id: "basic-bar"},
@@ -227,15 +230,24 @@ const Dashboard = (props) => {
                                         },
                                         stroke: {
                                             curve: 'straight'
-                                        }
+                                        },
+                                        responsive: [{
+                                            breakpoint: 500,
+                                            options: {
+                                                chart: {
+                                                    width: 300,
+                                                    height: 300
+                                                }
+                                            }
+                                        }]
                                     }}
                                     series  = {[{
                                         name: "Number of articles published for " + searchQuery,
                                         data: analytics.map((year) => year.count)
                                     }]}
                                     type   = "area"
-                                    width  = "925"
-                                    height = "350"
+                                    width  = {width < 500 ? "360" : "1000"}
+                                    height = {width < 500 ? "275" : "350"}
                               />
                             </div>
                         </div>
@@ -246,7 +258,6 @@ const Dashboard = (props) => {
                             'Analytics'</NavLink> section.
                         </span>
                     </div>   
-                </div>
             )
         }
     
