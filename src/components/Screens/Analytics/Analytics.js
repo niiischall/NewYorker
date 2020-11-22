@@ -107,16 +107,16 @@ const Analytics = (props) => {
                                 type: 'pie',
                             },
                             labels: source.map(source => source.term),
-                            legend: {
-                                position: 'bottom'
-                            },
                             responsive: [{
                                 breakpoint: 500,
                                 options: {
                                     chart: {
                                         width: 380,
-                                        height: 275
-                                    }
+                                        height: 250
+                                    },
+                                    legend: {
+                                        position: 'bottom'
+                                    },
                                 }   
                             }]
                         }}
