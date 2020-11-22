@@ -111,7 +111,8 @@ const Analytics = (props) => {
                                 breakpoint: 500,
                                 options: {
                                     chart: {
-                                        width: 380
+                                        width: 380,
+                                        height: 300
                                     },
                                     legend: {
                                         position: 'bottom',
@@ -120,8 +121,9 @@ const Analytics = (props) => {
                                 }   
                             }]
                         }}
-                        type  = "pie" 
-                        width = {600}
+                        type   = "pie" 
+                        width  = {600}
+                        height = {400} 
                     />
                 </div>
             </div>
@@ -198,7 +200,7 @@ const Analytics = (props) => {
                         }} 
                         series  = {material.map(source => source.count)} 
                         type    = "radialBar" 
-                        height  = {390} 
+                        height  = {400} 
                         width   = {600}
                     />
                 </div>
