@@ -100,10 +100,8 @@ const Analytics = (props) => {
                         SOURCES THAT WROTE ABOUT “{searchedQuery}.”
                     </p>
                     <ReactApexChart 
-                        series  = {source.map(source => source.count)}
                         options = {{
                             chart: {
-                                width: 600,
                                 type: 'pie',
                             },
                             labels: source.map(source => source.term),
@@ -112,16 +110,18 @@ const Analytics = (props) => {
                                 options: {
                                     chart: {
                                         width: 350,
-                                        height: 350
+                                        height: 300
                                     },
+                                    labels: source.map(source => source.term),
                                     legend: {
                                         position: 'bottom'
                                     }   
                                 }
                             }]
                         }}
-                        type   = "pie" 
-                        width  = {600}
+                        series  = {source.map(source => source.count)}
+                        type    = "pie" 
+                        width   = {600}
                     />
                 </div>
             </div>
