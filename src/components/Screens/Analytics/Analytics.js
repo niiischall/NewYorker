@@ -115,15 +115,13 @@ const Analytics = (props) => {
                                         height: 300
                                     },
                                     legend: {
-                                        position: 'bottom',
-                                        textAlign: 'center'
+                                        position: 'bottom'
                                     }
                                 }   
                             }]
                         }}
                         type   = "pie" 
                         width  = {600}
-                        height = {400} 
                     />
                 </div>
             </div>
@@ -232,7 +230,6 @@ const Analytics = (props) => {
                         }} 
                         series  = {document.map(document => document.count)} 
                         type    = "donut" 
-                        height  = {350} 
                         width   = {550}
                     />
                 </div>               
