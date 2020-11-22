@@ -94,9 +94,12 @@ const Analytics = (props) => {
     if(source.length !== 0 && material.length !== 0 && document.length !== 0)
       mainContent = (
         <div className = {classes.GraphContainer}>
-            <div style = {{padding: '5rem 0', marginBottom: '3rem'}}>
+        <div style = {{marginBottom: '3rem'}}>
             <div style = {{overflow: 'hidden'}}>
-                <div className = {classes.contentMainGraph}>
+                <div 
+                    className = {classes.contentMainGraph} 
+                    style = {{position: 'absolute!important'}}
+                >
                     <p className = {classes.articlesHeadingText}>
                         SOURCES THAT WROTE ABOUT “{searchedQuery}.”
                     </p>
