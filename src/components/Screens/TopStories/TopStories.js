@@ -21,7 +21,7 @@ const TopStories = React.memo((props) => {
     const [ currentSlide, setCurrentSlide ] = useState(0);
 
     useEffect(() => {
-        if(selectedCategory && stories.length === 0){
+        if(selectedCategory){
             setCurrentSlide(0);
             dispatch(actions.fetchStories(selectedCategory));
         }
