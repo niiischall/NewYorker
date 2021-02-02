@@ -18,10 +18,11 @@ const TopStories = React.memo((props) => {
     const isLoading        = useSelector(store => store.topStories.topStoriesLoader);
     const stories          = useSelector(store => store.topStories.topStories);
 
-    const [ currentSlide, setCurrentSlide ] = useState(0);
+    const [ currentSlide, setCurrentSlide ]     = useState(0);
+    const [ chosenCategory, setChosenCategory ] = useState(null);
 
     useEffect(() => {
-        if(selectedCategory){
+        if(selectedCategory && chosenCategory){
             setCurrentSlide(0);
             dispatch(actions.fetchStories(selectedCategory));
         }
@@ -39,6 +40,7 @@ const TopStories = React.memo((props) => {
     }
         
     const handleSelectedCategory = (event) => {
+        setChosenCategory(event);
         dispatch(actions.selectCategory(event));
     }
 
