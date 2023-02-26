@@ -1,24 +1,27 @@
-import React from 'react';
-import classes from './Layout.css';
+import React from "react";
+import classes from "./Layout.css";
 
-import SideDrawer from '../components/CommonComponents/SideDrawer/SideDrawer';
+import SideDrawer from "../components/CommonComponents/SideDrawer/SideDrawer";
 
 const Layout = (props) => {
-    return(
-        <div className = {classes.Layout}>
-            <SideDrawer showState = {props.showDrawer} toggleSidebar = {props.toggleSidebar} />
-            <main 
-                style = {{
-                    flex: 1, 
-                    display: 'flex', 
-                    flexDirection: 'column',
-                    minHeight: '100vh'
-                }}
-            >
-                {props.children}
-            </main> 
-        </div>
-    )
-}
+  return (
+    <div className={classes.Layout}>
+      <SideDrawer
+        showState={props.showDrawer}
+        toggleSidebar={props.toggleSidebar}
+      />
+      <main
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+        }}
+      >
+        {props.children}
+      </main>
+    </div>
+  );
+};
 
 export default Layout;
